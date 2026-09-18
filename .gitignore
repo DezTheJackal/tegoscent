@@ -1,0 +1,38 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# --- Virtual environments ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- TegoScent runtime output / secrets ---
+# API keys - never commit these. Copy .tegoscent.json.example if you keep one.
+.tegoscent.json
+*.env
+.env
+
+# Generated graphs/reports - these are run output, not source
+*.html
+tegoscent_output.*
+out/
+output/
+
+# --- pyvis leaves this behind in the cwd when it renders a graph ---
+lib/
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.swp
+
+# --- OS cruft ---
+.DS_Store
+Thumbs.db
+desktop.ini
