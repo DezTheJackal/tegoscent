@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tegoscent"
+version = "1.0.0"
+description = "Free, open-source Maltego-style link-analysis / OSINT tool."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "dnspython>=2.6",
+    "python-whois>=0.9.4",
+    "networkx>=3.2",
+    "pyvis>=0.3.2",
+    "ipwhois>=1.2.0",
+    "phonenumbers>=8.13",
+    "shodan>=1.31",
+]
+
+[project.scripts]
+tegoscent = "tegoscent.cli:main"
+
+[tool.setuptools]
+packages = ["tegoscent", "tegoscent.transforms"]
