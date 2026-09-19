@@ -79,6 +79,49 @@ tegoscent list-machines
 Open the `.html` output in a browser: drag nodes, scroll to zoom, hover a
 node for every property a transform attached to it.
 
+## Startup banner
+
+Every run prints a neon cyberpunk logo (cyan → violet → magenta gradient via
+24-bit ANSI). Running `tegoscent` with no arguments, or `tegoscent --help`,
+also prints a "replace the `<...>` placeholders with your target" quick-start
+guide underneath it:
+
+```
+ _______ ______ _____  ____   _____  _____ ______ _   _ _______
+|__   __|  ____/ ____|/ __ \ / ____|/ ____|  ____| \ | |__   __|
+   | |  | |__ | |  __| |  | | (___ | |    | |__  |  \| |  | |
+   | |  |  __|| | |_ | |  | |\___ \| |    |  __| | . ` |  | |
+   | |  | |___| |__| | |__| |____) | |____| |____| |\  |  | |
+   |_|  |______\_____|\____/|_____/ \_____|______|_| \_|  |_|
+────────────────────────────────────────────────────────────────
+         FREE & OPEN-SOURCE OSINT LINK-ANALYSIS ENGINE
+         root@tegoscent:~# initiate_recon --target ???
+────────────────────────────────────────────────────────────────
+
+QUICK START
+
+  SYNTAX:
+    tegoscent run <ENTITY_TYPE> <TARGET_VALUE> [OPTIONS]
+
+  EXAMPLES  -  replace every <...> placeholder with your real target
+
+    tegoscent run Domain <target-domain.com> --machine footprint_l2 --depth 2 -o report.html
+    tegoscent run EmailAddress <target@example.com> --machine person_footprint
+    tegoscent run Username <target_handle> --depth 1
+    tegoscent run IPv4Address <1.2.3.4> --machine footprint_l2 --format json -o report.json
+    tegoscent run PhoneNumber <+15551234567> --machine person_footprint
+```
+
+(shown here without color - in a real terminal the logo renders as a cyan →
+violet → magenta gradient, placeholders in bold hot pink, section headers in
+acid green.)
+
+Color is skipped automatically when output isn't a terminal, or when
+`NO_COLOR`/`TEGOSCENT_NO_COLOR` is set (the [no-color.org](https://no-color.org)
+convention). To suppress the banner entirely - useful when piping tegoscent's
+stdout into another tool or a script - pass `--no-banner` or set
+`TEGOSCENT_NO_BANNER=1`.
+
 ## API keys (optional)
 
 Set via environment variable or `~/.tegoscent.json`:
