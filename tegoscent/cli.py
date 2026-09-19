@@ -17,6 +17,7 @@ Requirements (pip install -r requirements.txt):
 from __future__ import annotations
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -190,5 +191,20 @@ def main(argv: list[str] | None = None) -> int:
     return 1
 
 
+def entry_point() -> int:
+    """
+    Console-script entry point (see pyproject.toml [project.scripts]).
+    Wraps main() with the same BrokenPipeError handling that __main__.py
+    applies for `python -m tegoscent`, so piping into `head`/`less -F`/etc.
+    behaves identically no matter which entry point launched the CLI.
+    """
+    try:
+        return main()
+    except BrokenPipeError:
+        devnull = os.open(os.devnull, os.O_WRONLY)
+        os.dup2(devnull, sys.stdout.fileno())
+        return 0
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(entry_point())

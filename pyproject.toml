@@ -20,7 +20,7 @@ dependencies = [
 ]
 
 [project.scripts]
-tegoscent = "tegoscent.cli:main"
+tegoscent = "tegoscent.cli:entry_point"
 
 [tool.setuptools]
 packages = ["tegoscent", "tegoscent.transforms"]
