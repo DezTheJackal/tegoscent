@@ -21,6 +21,7 @@ import sys
 from pathlib import Path
 
 from . import transforms  # noqa: F401  (import registers all built-in transforms)
+from . import banner
 from .config import load_config
 from .engine import Engine, MACHINES
 from .entities import ENTITY_TYPES, make_entity
@@ -37,6 +38,8 @@ def build_parser() -> argparse.ArgumentParser:
         epilog=__doc__,
     )
     parser.add_argument("--verbose", "-v", action="store_true", help="Enable debug logging.")
+    parser.add_argument("--no-banner", action="store_true",
+                         help="Suppress the startup banner (or set TEGOSCENT_NO_BANNER=1).")
     parser.add_argument("--config", default=None, help="Path to JSON config file (default: ~/.tegoscent.json).")
     parser.add_argument("--timeout", type=int, default=10, help="Per-transform network timeout, seconds (default: 10).")
 
@@ -145,6 +148,17 @@ def _harden_console_encoding() -> None:
 
 def main(argv: list[str] | None = None) -> int:
     _harden_console_encoding()
+    raw_argv = sys.argv[1:] if argv is None else list(argv)
+
+    if banner.banner_enabled(raw_argv):
+        show_guide = (not raw_argv) or ("-h" in raw_argv) or ("--help" in raw_argv)
+        banner.print_banner(show_guide=show_guide)
+
+    if not raw_argv:
+        print("Run 'tegoscent run <ENTITY_TYPE> <TARGET_VALUE>' to get started,")
+        print("or 'tegoscent --help' for the full flag reference.\n")
+        return 0
+
     parser = build_parser()
     args = parser.parse_args(argv)
 
