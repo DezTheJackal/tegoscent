@@ -6,7 +6,7 @@ against it and everything the transforms find, and renders the result as an
 interactive link-analysis graph - the same core workflow as Maltego CE/Pro,
 without the license.
 
-Built by DezTheJackal for NetEye engagements: recon, OSINT, footprinting.
+Built by DezTheJackal for  engagements: recon, OSINT, footprinting.
 
 ## What it does (and doesn't)
 
